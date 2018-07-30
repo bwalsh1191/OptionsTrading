@@ -5,8 +5,7 @@
 
 from json import dumps
 from requests import get
-import random
-symbol = raw_input("Enter a Symbol: ").upper()
+symbol = raw_input("Enter a stock symbol: ").upper()
 
 #pull a stocks symbol
 
@@ -17,7 +16,9 @@ companySymbol = stockData[symbol]['quote']['symbol']
 companyName = stockData[symbol]['quote']['companyName']
 companySector = stockData[symbol]['quote']['sector']
 companyOpen = stockData[symbol]['quote']['open']
-companyClose= stockData[symbol]['quote']['close']
+companyClose = stockData[symbol]['quote']['close']
+companyMarketCap = stockData[symbol]['quote']['marketCap']
+
 
 companyVariance = companyClose - companyOpen
 print "\n"
@@ -27,8 +28,7 @@ print "Sector: " + str(companySector)
 print "Open Price" + str(companyOpen)
 print "Close Price" + str(companyClose)
 print "Variance: " + str(companyVariance) 
-print "\n"
-
+print "Market Cap: " + str(companyMarketCap)
 
 
 '''with open('output.json', 'w') as ofile:
