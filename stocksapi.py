@@ -3,35 +3,40 @@
 #this file is used for pulling stock data for a specific symbol
 '''
 
-from json import dumps
-from requests import get
-symbol = raw_input("Enter a stock symbol: ").upper()
+import requests
+import json
+
 
 #pull a stocks symbol
+def get_stock_data(symbol):
+    stockAPI = 'https://api.iextrading.com/1.0/stock/market/batch?symbols=' + symbol + '&types=quote&range=1m&last=5'
+    stockData = requests.get(stockAPI).json()
 
-stockAPI = 'https://api.iextrading.com/1.0/stock/market/batch?symbols=' + symbol + '&types=quote,news,chart&range=1m&last=5'
-stockData = get(stockAPI).json()
+    companySymbol = stockData[symbol]['quote']['symbol']
+    companyName = stockData[symbol]['quote']['companyName']
+    companySector = stockData[symbol]['quote']['sector']
+    companyOpen = stockData[symbol]['quote']['open']
+    companyMarketCap = stockData[symbol]['quote']['marketCap']
+    companyCurrentPrice = stockData[symbol]['quote']['latestPrice']
+    companyChange = stockData[symbol]['quote']['change']
 
-companySymbol = stockData[symbol]['quote']['symbol']
-companyName = stockData[symbol]['quote']['companyName']
-companySector = stockData[symbol]['quote']['sector']
-companyOpen = stockData[symbol]['quote']['open']
-companyClose = stockData[symbol]['quote']['close']
-companyMarketCap = stockData[symbol]['quote']['marketCap']
+    companyDailyVariance = companyCurrentPrice - companyOpen
+    companyMarketCap = "{:,}".format(companyMarketCap)
+
+    print "\n"
+    print "Symbol: " + str(companySymbol)
+    print "Name: " + str(companyName)
+    print "Sector: " + str(companySector)
+    print "Open Price: $" + str(companyOpen)
+    print "Current Price: $" + str(companyCurrentPrice)
+    print "Daily Variance: $" + str(companyDailyVariance) 
+    print "Market Cap: $" + str(companyMarketCap)
+    print "Change: $" + str(companyChange)
+    print "\n"
 
 
-companyVariance = companyClose - companyOpen
-print "\n"
-print "Symbol: " + str(companySymbol)
-print "Name: " + str(companyName)
-print "Sector: " + str(companySector)
-print "Open Price" + str(companyOpen)
-print "Close Price" + str(companyClose)
-print "Variance: " + str(companyVariance) 
-print "Market Cap: " + str(companyMarketCap)
-
-
-'''with open('output.json', 'w') as ofile:
-    ofile.write(dumps(sumamry_daily))
-ofile.close()
-'''
+    '''
+    with open('output.json', 'w') as ofile:
+        ofile.write(dumps(sumamry_daily))
+    ofile.close()
+    '''
