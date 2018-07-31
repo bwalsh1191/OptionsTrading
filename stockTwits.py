@@ -6,8 +6,8 @@
 import json
 import requests
 
-def get_stockTwits(symbol):
-    symbol = 'AAPL'
+
+def get_stockTwitsBody(symbol):
     stockTwits = requests.get('https://api.stocktwits.com/api/2/streams/symbol/' + symbol + '.json')
     stockTwits_json_str = stockTwits.content
     stockTwits_data = json.loads(stockTwits_json_str)
@@ -37,7 +37,15 @@ def get_stockTwits(symbol):
     return totalSentiment
 '''
 
+def get_stockTwitsSentiment(symbol):
+    stockTwits = requests.get('https://api.stocktwits.com/api/2/streams/symbol/' + symbol + '.json')
+    stockTwits_json_str = stockTwits.content
+    stockTwits_data = json.loads(stockTwits_json_str)
+    sentiment = '\n'
 
-
-
-#stockTwits = 'https://api.stocktwits.com/api/2/streams/symbol/' + symbol + '.json'
+    
+    for index in range (0,len(stockTwits_data['messages'])):
+        message= (str(stockTwits_data['messages'][index]['entities']['sentiment']).encode('utf-8')) + '\n'
+        sentiment = sentiment + str(index+1) + ". " + message
+        index+=1
+    return sentiment
