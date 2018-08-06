@@ -1,6 +1,7 @@
 
 '''
 #this file is used for pulling stock data for a specific symbol using the stockTwits API
+edit
 '''
 
 import json
