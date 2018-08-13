@@ -27,14 +27,18 @@ def get_stockTwitsSentiment(symbol):
     stockTwits_json_str = stockTwits.content
     stockTwits_data = json.loads(stockTwits_json_str)
     totalSentiment = 0
+    posSent = 0
+    negSent = 0
 
     
     for index in range (0,len(stockTwits_data['messages'])):
         sent= str(stockTwits_data['messages'][index]['entities']['sentiment'])
         if(sent == "{'basic': 'Bullish'}"):
-            totalSentiment = totalSentiment +1
+            posSent = posSent +1
 
         if(sent == "{'basic': 'Bearish'}"):
-            totalSentiment = totalSentiment -1
+            negSent = negSent -1
         index+=1
-    print("The total sentiment score is " + str(totalSentiment))
+    totalSentiment = posSent + negSent
+    print("The total Positive Sentiment is " + str(posSent) + ". The total Negative Sentiment is " + str(negSent)
+    + ". Combined Sentiment Score is: " + str(totalSentiment) + '\n')
