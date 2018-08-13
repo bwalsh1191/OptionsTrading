@@ -3,20 +3,14 @@ import stockTwits
 import alyien
 import json 
 import requests
-import Flask
 
 
 
-#symbol = raw_input("Enter a stock symbol: ").upper()
+symbol = input("Enter a stock symbol: ").upper()
 
-#stockInfo.get_stock_data(symbol)
-#stMessages = stockTwits.get_stockTwitsBody(symbol)
-#stSentiment = stockTwits.get_stockTwitsSentiment(symbol)
-#print stMessages
-#print stSentiment
-app = Flask(__name__)
+stockInfo.get_stock_data(symbol)
+stockTwits.get_stockTwitsBody(symbol)
+stockTwits.get_stockTwitsSentiment(symbol)
 
-@app.route('/')
-def hello():
-    return 'Hello, World!'
+
 

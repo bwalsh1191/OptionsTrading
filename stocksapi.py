@@ -23,16 +23,16 @@ def get_stock_data(symbol):
     companyDailyVariance = companyCurrentPrice - companyOpen
     companyMarketCap = "{:,}".format(companyMarketCap)
 
-    print "\n"
-    print "Symbol: " + str(companySymbol)
-    print "Name: " + str(companyName)
-    print "Sector: " + str(companySector)
-    print "Open Price: $" + str(companyOpen)
-    print "Current Price: $" + str(companyCurrentPrice)
-    print "Daily Variance: $" + str(companyDailyVariance) 
-    print "Market Cap: $" + str(companyMarketCap)
-    print "Change: $" + str(companyChange)
-    print "\n"
+    print ("\n")
+    print ("Symbol: " + str(companySymbol))
+    print ("Name: " + str(companyName))
+    print ("Sector: " + str(companySector))
+    print ("Open Price: $" + str(companyOpen))
+    print ("Current Price: $" + str(companyCurrentPrice))
+    print ("Daily Variance: $" + str(companyDailyVariance))
+    print ("Market Cap: $" + str(companyMarketCap))
+    print ("Change: $" + str(companyChange))
+    print ("\n")
 
 
     '''
