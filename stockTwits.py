@@ -6,6 +6,7 @@ edit
 
 import json
 import requests
+import time, datetime
 
 
 def get_stockTwitsBody(symbol):
@@ -19,7 +20,7 @@ def get_stockTwitsBody(symbol):
         message= ((stockTwits_data['messages'][index]['body']) + '\n')
         result = result + str(index+1) + ". " + message
         index+=1
-        print(result)
+    print(result)
 
 
 def get_stockTwitsSentiment(symbol):
@@ -29,6 +30,7 @@ def get_stockTwitsSentiment(symbol):
     totalSentiment = 0
     posSent = 0
     negSent = 0
+    sentRatio = 0
 
     
     for index in range (0,len(stockTwits_data['messages'])):
@@ -40,5 +42,26 @@ def get_stockTwitsSentiment(symbol):
             negSent = negSent -1
         index+=1
     totalSentiment = posSent + negSent
+    sentRatio = int((totalSentiment/len(stockTwits_data['messages']))*(100))
     print("The total Positive Sentiment is " + str(posSent) + ". The total Negative Sentiment is " + str(negSent)
-    + ". Combined Sentiment Score is: " + str(totalSentiment) + '\n')
+    + ". Combined Sentiment Score is: " + str(totalSentiment) + " with a ratio sentiment ratio of: " + str(sentRatio) + "%" + '\n')
+
+    
+    #MAKE THIS CLEANER SO THE TWO FILES ARE SEPERATE
+    stockAPI = 'https://api.iextrading.com/1.0/stock/market/batch?symbols=' + symbol + '&types=quote&range=1m&last=5'
+    stockData = requests.get(stockAPI).json()
+    companyCurrentPrice = stockData[symbol]['quote']['latestPrice']
+
+
+    #output is used to store all the sentiment ratio and data  
+    ts = time.time()
+    st = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
+    output = [st, symbol,sentRatio,companyCurrentPrice]
+
+
+
+
+
+    #writing this data to a file to make a running record of the data sentiment
+    f = open("amd_sentiment.txt", "a")
+    f.write(str(output) + '\n')
