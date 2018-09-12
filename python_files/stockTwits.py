@@ -56,12 +56,13 @@ def get_stockTwitsSentiment(symbol):
     #output is used to store all the sentiment ratio and data  
     ts = time.time()
     st = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
-    output = [st, symbol,sentRatio,companyCurrentPrice]
+    output = [st, symbol,posSent, negSent, totalSentiment, sentRatio,companyCurrentPrice]
 
 
 
 
 
-    #writing this data to a file to make a running record of the data sentiment
-    f = open("amd_sentiment.txt", "a")
+    #writing this data to a file to make a running record of the data sentiment bsaed on the symbol passed
+    file_name = symbol + "_sentiment.txt"
+    f = open("/Users/brian/Development/stock_env/OptionsTrading/stock__files/" + file_name, "a")
     f.write(str(output) + '\n')
