@@ -12,7 +12,7 @@ from datetime import datetime
 
 while True:
 
-    symbols = ["AAPL", 'AMD', "TSLA", "T"]
+    symbols = ["AAPL", 'AMD']
     sleep_time = 0
     num_of_week = datetime.today().weekday()
 
@@ -21,7 +21,7 @@ while True:
     else: 
         sleep_time = 600
 
-    for x in range(4):
+    for x in range(2):
         stockInfo.get_stock_data(symbols[x])
         stockTwits.get_stockTwitsBody(symbols[x])
         stockTwits.get_stockTwitsSentiment(symbols[x])
