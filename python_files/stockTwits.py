@@ -61,7 +61,7 @@ def get_stockTwitsSentiment(symbol):
     day_of_week = days[num_of_week]
 
     #writing this data to a file to make a running record of the data sentiment bsaed on the symbol passed
-    output = [time_stamp, day_of_week, symbol,posSent, negSent, totalSentiment, sentRatio,companyCurrentPrice]
+    output = [time_stamp, day_of_week, symbol, posSent, negSent, totalSentiment, sentRatio,companyCurrentPrice]
     file_name = symbol.lower() + "_sentiment.txt"
     f = open("/Users/brian/Development/stock_env/OptionsTrading/stock__files/" + file_name, "a")
     f.write(str(output) + '\n')

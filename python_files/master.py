@@ -12,7 +12,7 @@ from datetime import datetime
 
 while True:
 
-    symbols = ["AAPL", 'AMD']
+    symbols = ["AAPL", 'AMD','TSLA']
     sleep_time = 0
     num_of_week = datetime.today().weekday()
 
