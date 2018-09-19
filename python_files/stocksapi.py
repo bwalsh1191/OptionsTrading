@@ -7,8 +7,8 @@ import requests
 import json
 
 
-#pull a stocks symbol
-def get_stock_data(symbol):
+#pull a stocks symbol and print various data
+def prnt_stock_data(symbol):
     stockAPI = 'https://api.iextrading.com/1.0/stock/market/batch?symbols=' + symbol + '&types=quote&range=1m&last=5'
     stockData = requests.get(stockAPI).json()
 
@@ -34,9 +34,8 @@ def get_stock_data(symbol):
     print ("Change: $" + str(companyChange))
     print ("\n")
 
-
-    '''
-    with open('output.json', 'w') as ofile:
-        ofile.write(dumps(sumamry_daily))
-    ofile.close()
-    '''
+def return_stock_data(symbol):
+    stockAPI = 'https://api.iextrading.com/1.0/stock/market/batch?symbols=' + symbol + '&types=quote&range=1m&last=5'
+    stockData = requests.get(stockAPI).json()
+    companyCurrentPrice = stockData[symbol]['quote']['latestPrice']
+    return companyCurrentPrice

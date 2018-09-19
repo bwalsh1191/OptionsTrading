@@ -22,7 +22,7 @@ while True:
         sleep_time = 600
 
     for x in range(2):
-        stockInfo.get_stock_data(symbols[x])
+        stockInfo.prnt_stock_data(symbols[x])
         stockTwits.get_stockTwitsBody(symbols[x])
         stockTwits.get_stockTwitsSentiment(symbols[x])
    
