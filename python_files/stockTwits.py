@@ -17,8 +17,8 @@ def get_stockTwitsBody(symbol):
     result = '\n'
 
     
-    for index in range (0,len(stockTwits_data['messages'])):
-        message= ((stockTwits_data['messages'][index]['body']) + '\n')
+    for index in range (0,30):
+        message = ((stockTwits_data['messages'][index]['body']) + '\n')
         result = result + str(index+1) + ". " + message
         index+=1
     print(result)
@@ -35,7 +35,7 @@ def get_stockTwitsSentiment(symbol):
 
     #Calculating the sentiment score from stocktwits
 
-    for index in range (0,len(stockTwits_data['messages'])):
+    for index in range (0,30):
         sent= str(stockTwits_data['messages'][index]['entities']['sentiment'])
         if(sent == "{'basic': 'Bullish'}"):
             posSent = posSent +1
@@ -49,6 +49,7 @@ def get_stockTwitsSentiment(symbol):
 
     print("The total Positive Sentiment is " + str(posSent) + ". The total Negative Sentiment is " + str(negSent)
     + ". Combined Sentiment Score is: " + str(totalSentiment) + " with a ratio sentiment ratio of: " + str(sentRatio) + "%" + '\n')
+    
 
     #get the rest of the data for the files to write
     companyCurrentPrice = stocksApi.return_stock_data(symbol)
@@ -60,3 +61,17 @@ def get_stockTwitsSentiment(symbol):
     file_name = symbol.lower() + "_sentiment.txt"
     f = open("/Users/brian/Development/stock_env/OptionsTrading/stock__files/" + file_name, "a")
     f.write(str(output) + '\n')
+
+    
+'''
+#write the data to the files
+def write_file(symbol, posSent, negSent, totalSentiment, sentRatio):
+    companyCurrentPrice = stocksApi.return_stock_data(symbol)
+    time_stamp = date.getTimeStamp()
+    day_of_week = date.getDayofWeek()
+    output = [time_stamp, day_of_week, symbol, posSent, negSent, totalSentiment, sentRatio, companyCurrentPrice]
+    file_name = symbol.lower() + "_sentiment.txt"
+    f = open("/Users/brian/Development/stock_env/OptionsTrading/stock__files/" + file_name, "a")
+    f.write(str(output) + '\n')
+
+'''

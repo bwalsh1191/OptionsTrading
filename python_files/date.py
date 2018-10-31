@@ -1,7 +1,6 @@
 
 import time, datetime
 
-ts = time.time()
 
 def getDayofWeek():
 #gets all the date/time information for recording the information 
@@ -13,5 +12,6 @@ def getDayofWeek():
 
 
 def getTimeStamp():
+    ts = time.time()
     time_stamp = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
     return time_stamp
